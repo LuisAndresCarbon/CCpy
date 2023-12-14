@@ -9,18 +9,6 @@ from .models import Product
 
 # Create your views here.
 
-"""@api_view(['GET'])
-def apiOverview(request):
-    api_urls = {
-        'List': '/product-list/',
-        'Detail View': '/product-detail/<int:id>/',
-        'Create': '/product-create/',
-        'Update': '/product-update/<int:id>/',
-        'Delete': '/product-detail/<int:id>/',
-    }
-    return Response(api_urls);
-"""
-
 @api_view(['GET'])
 def ShowAll(request):
     print("Hola, mundo!")
@@ -50,7 +38,7 @@ def CreateProduct(request):
 @api_view(['POST'])
 def updateProduct(request, pk):
     product = Product.objects.get(id=pk)
-    serializer = ProductSerializer(instance=product, data=request.data)
+    serializer = ProductSerializer(instance=product, data=request.data) 
     if serializer.is_valid():
         serializer.save()
 
