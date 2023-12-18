@@ -13,11 +13,11 @@ def show_all(request):
 @api_view(['POST'])
 def login(request):
     # Aquí puedes realizar la lógica de validación del inicio de sesión
-    email = request.data.get('email', '')
-    password = request.data.get('password', '')
+    usuario_email = request.data.get('usuario_email', '')
+    usuario_pw = request.data.get('usuario_pw', '')
 
     try:
-        user = User.objects.get(email=email, password=password)
+        user = User.objects.get(usuario_email=usuario_email, usuario_pw=usuario_pw)
         serializer = UserSerializer(user)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except User.DoesNotExist:
