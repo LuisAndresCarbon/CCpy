@@ -3,12 +3,29 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import User
 from .serializers import UserSerializer
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET'])
+@authentication_classes([JWTAuthentication])  # Aquí se aplica el decorador
+@permission_classes([IsAuthenticated])
 def show_all(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+    try:
+     users = User.objects.all()
+     serializer = UserSerializer(users, many=True)
+     return Response(serializer.data)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+def getRoutes(request):
+    routes = [
+        '/api/token',
+        '/api/token/refresh',
+    ]
+
+    return Response(routes)
 
 @api_view(['POST'])
 def login(request):
