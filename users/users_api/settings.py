@@ -17,7 +17,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+MIGRATION_MODULES = { 'app_name': 'proyectos.migrations_no_auto', }
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,57 +1,23 @@
-from django.shortcuts import render
-
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-
+from .queries import show_projects_query
+from django.db import connection
+from .models import Project
 from .serializers import projectSerializer
-from .models import projects
+from django.http import JsonResponse
 
 
-# Create your views here.
+def show_projects(request):
+    with connection.cursor() as cursor:
+        cursor.execute(show_projects_query())
+        projects = cursor.fetchall()
 
-@api_view(['GET'])
-def ShowAll(request):
-    print("Hola, mundo!")
-    products = projects.objects.all()
-    serializer = projectSerializer(products, many=True)
-    return Response(serializer.data)
+    # Si tus resultados son tuplas, ajusta la lógica según sea necesario
+        with connection.cursor() as cursor:
+            cursor.execute(show_projects_query())
+        # Obtener los resultados como instancias del modelo Project
+            projects = [Project(*row) for row in cursor.fetchall()]
+    # Serializar los resultados usando un serializador Django REST Framework
+    serializer = projectSerializer(projects, many=True)
+    serialized_projects = serializer.data
 
-
-@api_view(['GET'])
-def ViewProduct(request, pk):
-    product = projects.objects.get(id=pk)
-    serializer = projectSerializer(product, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def CreateProduct(request):
-    serializer = projectSerializer(data=request.data)
-
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-
-
-
-@api_view(['POST'])
-def updateProduct(request, pk):
-    product = projects.objects.get(id=pk)
-    serializer = projectSerializer(instance=product, data=request.data) 
-    if serializer.is_valid():
-        serializer.save()
-
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def deleteProduct(request, pk):
-    product = projects.objects.get(id=pk)
-    product.delete()
-
-    return Response('Items delete successfully!')
-
-
-
-
+    # Devolver la respuesta en formato JSON
+    return JsonResponse({'projects': serialized_projects}, safe=False)

@@ -25,3 +25,4 @@ finally:
     if 'connection' in locals() and connection.is_connected():
         connection.close()
         print("Conexión cerrada.")
+        print(connection.queries)

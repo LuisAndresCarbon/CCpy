@@ -1,14 +1,6 @@
-from . import views
 from django.urls import path
-
+from .views import show_projects
 urlpatterns = [
-    #path('', views.apiOverview, name='apiOverview'),
-
-    path('product-list/', views.ShowAll, name='product-list'),
-    path('product-detail/<int:pk>/', views.ViewProduct, name='product-detail'),
-    path('product-create/', views.CreateProduct, name='product-create'),
-    path('product-update/<int:pk>/', views.updateProduct, name='product-update'),
-    path('product-delete/<int:pk>/', views.deleteProduct, name='product-delete'),
-
-
+    path('show-projects/', show_projects, name='show_projects'),
+    # Puedes agregar más URL según tus necesidades
 ]
