@@ -5,7 +5,7 @@ config = {
     'user': 'root',
     'password': 'Unico123',
     'host': 'localhost',  # Puedes cambiar esto según tu configuración
-    'database': 'canopia',
+    'database': 'db-portafolio',
     'raise_on_warnings': True,
 }
 

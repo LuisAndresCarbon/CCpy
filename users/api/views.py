@@ -29,7 +29,7 @@ def getRoutes(request):
 
 @api_view(['POST'])
 def login(request):
-    # Aquí puedes realizar la lógica de validación del inicio de sesión
+    # lógica de validación del inicio de sesión
     usuario_email = request.data.get('usuario_email', '')
     usuario_pw = request.data.get('usuario_pw', '')
 
