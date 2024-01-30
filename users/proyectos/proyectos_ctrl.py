@@ -4,12 +4,6 @@ from .models import Project
 import asyncio
 
 @database_sync_to_async
-def guardar_en_mi_tabla(datos):
-    with connection.cursor() as cursor:
-        sql_query = "INSERT INTO tb_projects (ProjectName, AggregationID, CounterpartID) VALUES ('{project_name}', '{aggregation_id}', '{counterpart_id}')"   
-        cursor.execute(sql_query, [datos['ProjectName'], datos['AggregationID'], datos['CounterpartID']])
-    
-@database_sync_to_async
 def get_max_id():
     try:
         with connection.cursor() as cursor:
@@ -18,7 +12,7 @@ def get_max_id():
             result = cursor.fetchone()
             return result[0] if result else None
     except IntegrityError as e:
-        print(f"IntegrityError: {e}")
+        print(f"IntegrityError al consultar el ID máximo del projects: {e}")
         return None
 
 @database_sync_to_async
@@ -27,23 +21,20 @@ def create_project(datos):
         new_project = Project(
             ProjectName=datos['ProjectName'],
             AggregationID=datos['AggregationID'],
-            CounterpartID=datos['CounterpartID'],
-            Cve_Geo=datos['Cve_Geo'],
-            Cve_Unica=datos['Cve_Unica']
-            )
-        new_project.save()
+            CounterpartID=datos['CounterpartID']
+        )
+        new_project.save() # Save es como un Insert a la tabla
         return new_project.ProjectID
     except IntegrityError as e:
         print(f"IntegrityError al agregar proyectos: {e}")
         return None
-    except Exception as e:
-        print(f"Error al agregar proyectos: {e}")
-        return None
 
 async def fn_agregar_nuevos_proyectos(datos):
     try:
-        await asyncio.sleep(2)
+        
+        await asyncio.sleep(2)  # Simulación de operación asíncrona
         project_id = await create_project(datos)
+
         if project_id is not None:
             return {
                 'valido': 1,

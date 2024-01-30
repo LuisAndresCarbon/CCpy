@@ -18,7 +18,8 @@ class Project(models.Model):
     IDUserCreate = models.CharField(max_length=100, blank=True, null=True)
     DateModify = models.DateTimeField(auto_now_add=True)
     IDUserModify = models.CharField(max_length=100, blank=True, null=True)
-
+    class Meta:
+        db_table = 'tb_projects'
 
 
 class SigCat(models.Model): 
@@ -37,23 +38,3 @@ class SigCat(models.Model):
         # Mapeamos los resultados a un diccionario para seleccionar los campos específicos
         mapped_result = [{'CVE_GEO': row[0], 'CVE_EST': row[1], 'CVE_MUN': row[2], 'ESTADO': row[3], 'MUNICIPIO': row[4]} for row in result]
         return mapped_result
-    
-class NewProject(models.Model):
-    ProjectID = models.CharField(
-        db_column='ProjectID',max_length=255, blank=True, null=True)
-    ProjectName = models.CharField(
-        db_column='ProjectName',max_length=255, blank=True, null=True)
-    AggregationID = models.CharField(
-        db_column='AggregationID',max_length=255, blank=True, null=True)
-    CounterpartID = models.CharField(
-        db_column='CounterpartID',max_length=255, blank=True, null=True)
-    
-    Cve_Est = models.CharField(
-        db_column='Cve_Est',max_length=255, blank=True, null=True)
-    Cve_Mun = models.CharField(
-        db_column='Cve_Mun',max_length=255, blank=True, null=True)
-    class Meta:
-         managed =False
-         db_table = 'tb_projects'
-    def __str__(self) -> str:
-         return super().ProjectName
