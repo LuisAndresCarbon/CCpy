@@ -1,7 +1,15 @@
 from rest_framework import serializers
-from .models import Project
+from .models import Project, SigCat
 
-class projectSerializer(serializers.ModelSerializer):
+class BaseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Project
+        abstract = True
         fields = '__all__'
+
+class ProjectSerializer(BaseSerializer):
+    class Meta(BaseSerializer.Meta):
+        model = Project
+      
+class SigCatSerializer(BaseSerializer):
+    class Meta(BaseSerializer.Meta):
+        model = SigCat

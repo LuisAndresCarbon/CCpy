@@ -109,7 +109,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'users_api.wsgi.application'
 CORS_ORIGIN_ALLOW_ALL = True
-# settings.py
+
 CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 
    
@@ -120,7 +120,7 @@ CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db-portafolio',
+        'NAME': 'db_portafolio',
         'USER': 'root',
         'PASSWORD': 'Unico123',
         'HOST': 'localhost',  # Puedes cambiar esto según tu configuración
