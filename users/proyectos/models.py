@@ -15,7 +15,7 @@ class Project(models.Model):
     Status          = models.CharField(max_length=255, default='1')
     DateCreate      = models.DateTimeField(auto_now_add=True)
     IDUserCreate    = models.CharField(max_length=100, blank=True, null=True)
-    DateModify      = models.DateTimeField(auto_now_add=True)
+    DateModify      = models.DateTimeField()
     IDUserModify    = models.CharField(max_length=100, blank=True, null=True)
     class Meta:
         db_table = 'tb_projects'

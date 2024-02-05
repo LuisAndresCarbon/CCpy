@@ -21,7 +21,11 @@ def create_project(datos):
         new_project = Project(
             ProjectName=datos['ProjectName'],
             AggregationID=datos['AggregationID'],
-            CounterpartID=datos['CounterpartID']
+            CounterpartID=datos['CounterpartID'],
+            Cve_Geo  =datos['Cve_Geo'],
+            Cve_Est  =datos['Cve_Est'],
+            Cve_Mun  =datos['Cve_Mun'],
+            Cve_Unica=datos['Cve_Unica']
         )
         new_project.save() # Save es como un Insert a la tabla
         return new_project.ProjectID
