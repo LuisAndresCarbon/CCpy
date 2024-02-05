@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Project, SigCat
+from .models import Project
 
 class BaseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +10,3 @@ class ProjectSerializer(BaseSerializer):
     class Meta(BaseSerializer.Meta):
         model = Project
       
-class SigCatSerializer(BaseSerializer):
-    class Meta(BaseSerializer.Meta):
-        model = SigCat
