@@ -36,7 +36,7 @@ class Estado(models.Model):
 
 class Municipio(models.Model):
     Id_municipio = models.AutoField(primary_key=True)
-    Id_estado = models.TextField()
+    Id_estado = models.IntegerField()
     clave_municipio = models.CharField(max_length=10)
     nombre_municipio = models.CharField(max_length=255)
     tb_estados = models.ForeignKey(Estado, on_delete=models.CASCADE, db_column='tb_estados_Id_estado')

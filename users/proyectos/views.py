@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 from .models import Project, Estado, Aggregation, GeoNucleo
-from .serializers import ProjectSerializer
+from .serializers import ProjectSerializer, MunicipioSerializer
 from django.shortcuts import render
 from .queries import show_projects_query
 from django.db import connection
@@ -55,3 +55,8 @@ def newProject_api_view(request):
 'Cve_Mun'         ,
 'Cve_Unica'       )
     return JsonResponse({'newProject': list(newProject)})
+class MunicipiosPorEstadoView(APIView):
+    def get(self, request, Id_estado):
+        municipios = Municipio.objects.filter(Id_estado=Id_estado)
+        serializer = MunicipioSerializer(municipios, many=True)
+        return Response(serializer.data)
