@@ -21,13 +21,11 @@ async def agregarProyecto(request):
             data = json.loads(request.body)
             print("👀",data)
             result = await fn_agregar_nuevos_proyectos(data)
-            print(f"Resultado de la función externa: {result}")
             if not isinstance(result, dict):
                 result = {'error': 'Error en la lógica'}
             return JsonResponse(result)
         except json.JSONDecodeError as e:
             return JsonResponse({'error': 'Error al decodificar JSON'}, status=400)
-
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 def get_municipios(request):
@@ -53,10 +51,19 @@ def newProject_api_view(request):
 'Cve_Geo'         ,
 'Cve_Est'         ,
 'Cve_Mun'         ,
-'Cve_Unica'       )
+'id_phin',
+'Cve_Unica'       ,
+'Status')
     return JsonResponse({'newProject': list(newProject)})
 class MunicipiosPorEstadoView(APIView):
     def get(self, request, Id_estado):
         municipios = Municipio.objects.filter(Id_estado=Id_estado)
         serializer = MunicipioSerializer(municipios, many=True)
         return Response(serializer.data)
+class ShowDetailByMunicipality(APIView):
+    def get(self, request, id_mun):
+        cursor = connection.cursor()
+        cursor.execute("CALL ObtenerDatosPorMunicipio(%s)", [id_mun])
+        results = cursor.fetchall()
+        data = [{'NOM_NUC': row[0], 'CVE_GEO': row[1], 'id_phin': row[2]} for row in results]
+        return JsonResponse({'ctNomNuc': data})
