@@ -26,7 +26,8 @@ def create_project(datos):
             Cve_Est  =datos['Cve_Est'],
             Cve_Mun  =datos['Cve_Mun'],
             id_phin  =datos['id_phin'],
-            Cve_Unica=datos['Cve_Unica']
+            Cve_Unica=datos['Cve_Unica'],
+            Tipo=datos['Tipo'],   
         )
         new_project.save() # Save es como un Insert a la tabla
         return new_project.ProjectID
@@ -37,7 +38,7 @@ async def fn_agregar_nuevos_proyectos(datos):
     try:
         project = Project(**datos)
         project.full_clean()
-        await asyncio.sleep(2)  # Simulación de operación asíncrona
+        await asyncio.sleep(1)  # Simulación de operación asíncrona
         project_id = await create_project(datos)
 
         if project_id is not None:

@@ -13,6 +13,7 @@ class Project(models.Model):
     Cve_Mun         = models.CharField(max_length=100, blank=True, null=True)
     id_phin         = models.CharField(max_length=100)
     Cve_Unica       = models.CharField(max_length=100, blank=True, null=True)
+    Tipo       = models.CharField(max_length=100, blank=True, null=True)
     Status          = models.CharField(max_length=255, default='1', blank=True,)
     DateCreate      = models.DateTimeField(auto_now_add=True)
     IDUserCreate    = models.CharField(max_length=100, blank=True, null=True)

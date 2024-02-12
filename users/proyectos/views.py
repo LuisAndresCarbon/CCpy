@@ -67,3 +67,10 @@ class ShowDetailByMunicipality(APIView):
         results = cursor.fetchall()
         data = [{'NOM_NUC': row[0], 'CVE_GEO': row[1], 'id_phin': row[2]} for row in results]
         return JsonResponse({'ctNomNuc': data})
+class ShowDetailByphina(APIView):
+    def get(self, request, id_phin):
+        cursor = connection.cursor()
+        cursor.execute("CALL busqueda_CVE_UNICA_Y_TIPO(%s)", [id_phin])
+        results = cursor.fetchall()
+        data = [{'CVE_UNICA': row[0], 'TIPO': row[1]} for row in results]
+        return JsonResponse({'claveUnica': data})
