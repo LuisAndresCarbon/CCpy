@@ -120,7 +120,7 @@ CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_portafolio',
+        'NAME': 'bd_canopia',
         'USER': 'root',
         'PASSWORD': 'Unico123',
         'HOST': 'localhost',  # Puedes cambiar esto según tu configuración

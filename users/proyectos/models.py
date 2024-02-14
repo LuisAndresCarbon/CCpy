@@ -35,11 +35,10 @@ class Aggregation(models.Model):
         db_table = 'ct_agregationid'
     
 class Estado(models.Model):
-    Id_estado = models.TextField(primary_key=True)
-    CVE_EST = models.CharField(max_length=10, unique=True)
-    nombre_estado = models.CharField(max_length=255)
+    idEstado = models.TextField(primary_key=True)
+    nomEstado = models.CharField(max_length=10, unique=True)
     class Meta:
-        db_table = 'tb_estados'
+        db_table = 'ct_estado'
     
 
 class Municipio(models.Model):
