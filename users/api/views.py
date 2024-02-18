@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 @permission_classes([IsAuthenticated])
 def show_all(request):
     try:
+     id_user_create = request.user.id
      users = User.objects.all()
      serializer = UserSerializer(users, many=True)
      return Response(serializer.data)
