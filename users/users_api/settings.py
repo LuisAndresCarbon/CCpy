@@ -122,7 +122,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_portafolio',
         'USER': 'root',
-        'PASSWORD': 'Unico123',
+        'PASSWORD': '',
         'HOST': 'localhost',  # Puedes cambiar esto según tu configuración
         'PORT': '3306',  # Puedes cambiar esto según tu configuración
     }
