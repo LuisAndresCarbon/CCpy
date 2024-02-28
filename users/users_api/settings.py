@@ -19,6 +19,8 @@ ALLOWED_HOSTS = []
 # Application definition
 MIGRATION_MODULES = { 'app_name': 'proyectos.migrations_no_auto', }
 INSTALLED_APPS = [
+    'SIG.ActivityArea',
+    'SIG.ped',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -30,6 +32,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'sistemInfoGeo',
+    
 ]
 REST_FRAMEWORK = {
     
@@ -120,9 +124,9 @@ CORS_ORIGIN_WHITELIST = ["http://localhost:4200"]
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_portafolio',
+        'NAME': 'db_portafoliooo',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'Unico123',
         'HOST': 'localhost',  # Puedes cambiar esto según tu configuración
         'PORT': '3306',  # Puedes cambiar esto según tu configuración
     }

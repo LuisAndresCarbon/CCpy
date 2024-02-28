@@ -8,9 +8,9 @@ def show_projects_query():
         results = [dict(zip(columns, row)) for row in cursor.fetchall()]
     return JsonResponse({'projects': results})
 
-def insert_project(ProjectName, idAggregation, Counterpart, idnucleoAgrario,idUserCreate):
+def insert_project(ProjectName, idaggregation, Counterpart, idnucleoAgrario,idUserCreate):
     with connection.cursor() as cursor:
-        cursor.callproc('insert_project', [ProjectName, idAggregation, Counterpart, idnucleoAgrario, idUserCreate])
+        cursor.callproc('insert_project', [ProjectName, idaggregation, Counterpart, idnucleoAgrario, idUserCreate])
         result = cursor.fetchone()
     return result
 
@@ -37,7 +37,7 @@ def show_nucleoAgrario(id_mun):
         cursor.callproc("nucleoAgrByMunicipio", [id_mun])
         results = cursor.fetchall()
         if results:
-            data = [{'idnucleoAgrario': row[0], 'nameNuc': row[1], 'descripcion': row[2]} for row in results]
+            data = [{'idnucleoAgrario': row[0], 'NameNuc': row[1], 'descripcion': row[2]} for row in results]
             return JsonResponse(data, safe=False)
         else:
             return JsonResponse([], safe=False)
