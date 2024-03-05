@@ -3,7 +3,10 @@ from .queries import insert_project
 def fn_agregar_nuevos_proyectos(datos, user_id):
     try:
         # Llamar al procedimiento almacenado para insertar el proyecto
-        result = insert_project(datos['ProjectName'], datos['idaggregation'], datos['Counterpart'], datos['idnucleoAgrario'], user_id)
+        result = insert_project(datos['ProjectName'], 
+                                datos['idaggregation'], 
+                                datos['Counterpart'], 
+                                datos['idnucleoAgrario'], user_id)
         print("optenido", datos)
         if result[0] == 'valido':
             return {

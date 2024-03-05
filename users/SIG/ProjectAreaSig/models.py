@@ -36,7 +36,7 @@ class Catalogcertificacion(models.Model):
         db_table = 'ct_certificacion'
 
 class Catalogstatusvalidacionap(models.Model):
-    IdstatusValidacionAP = models.IntegerField(primary_key=True)
+    IdStatusValidacionAP = models.IntegerField(primary_key=True)
     StatusValicionAP = models.IntegerField()
     class Meta:
         db_table = 'ct_statusvalidacionap'

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SisteminfogeoConfig(AppConfig):
+class ProjectareasigConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'sistemInfoGeo'
+    name = 'SIG.ProjectAreaSig'
