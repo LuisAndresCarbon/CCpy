@@ -13,3 +13,4 @@ class aggregation(models.Model):
     descripcion = models.CharField(max_length=10, unique=True)
     class Meta:
         db_table = 'ct_aggregation'
+

@@ -41,3 +41,39 @@ def show_nucleoAgrario(id_mun):
             return JsonResponse(data, safe=False)
         else:
             return JsonResponse([], safe=False)
+        
+def fnprojecthist(ProjectName, idaggregation, Counterpart, idnucleoAgrario,idUserCreate):
+    with connection.cursor() as cursor:
+        cursor.callproc('insert_project', [ProjectName, idaggregation, Counterpart, idnucleoAgrario, idUserCreate])
+        result = cursor.fetchone()
+    return result
+
+def fnprojehistdetail(project_id):
+    try:
+        with connection.cursor() as cursor:
+            cursor.callproc("projecthistdetails", [project_id])
+            results = cursor.fetchall()
+            column_names = [desc[0] for desc in cursor.description]
+
+            data = []
+            for row in results:
+                data.append(dict(zip(column_names, row)))
+
+        return JsonResponse(data, safe=False)
+    except Exception as e:
+        # Manejar cualquier error aquí
+        print("Error:", e)
+        return JsonResponse([], safe=False)
+
+def fnspprojecthistory(idprojects, ProjectName, idaggregation, Counterpart, idnucleoAgrario,Justification, iduserrequest):
+    with connection.cursor() as cursor:
+        cursor.callproc('spprojecthistory', [idprojects, ProjectName, idaggregation, Counterpart, idnucleoAgrario, Justification, iduserrequest])
+        result = cursor.fetchone()
+    return result
+
+def FnNostifyProjecthist():
+    with connection.cursor() as cursor:
+        cursor.callproc('NotifyProyectoHist')
+        result = cursor.fetchall()
+        column_names = [column[0] for column in cursor.description]
+        return [dict(zip(column_names, row)) for row in result]
